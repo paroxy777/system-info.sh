@@ -4,6 +4,10 @@
 
 <p>Useful for identification / inventory / sales prep / etc.</p>
 
+<h2>Requirements</h2>
+<p>Requires the package hwinfo</p>
+<pre>apt install hwinfo</pre>
+
 <b>Sample Output:</b>
 <pre>
 LENOVO 20HGS0HK00
