@@ -25,7 +25,7 @@ Ubuntu 24.04.3 LTS
 
 <h2>To-Do</h2>
 <ul>
-  <ul>Improve dGPU detection for Intel Arc, AMD integrated graphics, NVIDIA Optimus and hybrid graphics configurations, etc.</ul>
-  <ul>Improve NVMe detection. (Use bus type instead of model name.)</ul>
-  <ul>Improve CPU speed range detection. (Use power management data).</ul>
+  <li>Improve dGPU detection. (Add Intel Arc, AMD integrated graphics, NVIDIA Optimus and hybrid graphics configurations, etc.)</li>
+  <li>Improve NVMe detection. (Use bus type instead of model name.)</li>
+  <li>Improve CPU speed range detection. (Use power management data instead).</li>
 </ul>
