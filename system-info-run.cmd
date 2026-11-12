@@ -1,0 +1,3 @@
+@ECHO OFF
+powershell.exe -ExecutionPolicy Bypass -File .\system-info.ps1
+ECHO Generating results, please wait ...
