@@ -4,6 +4,15 @@
 
 <p>Useful for identification / inventory / sales prep / etc.</p>
 
+<h3>Sample Output:</h3>
+<pre>
+LENOVO 20HGS0HK00
+Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz (0.4 - 3.9 GHz)
+25GB RAM / 500 GB NVMe SSD / DVD
+NVIDIA GeForce GTX 1050
+Ubuntu 24.04.3 LTS
+</pre>
+
 <h2>Requirements</h2>
 <h3>Linux</h3>
 <p>Requires the package hwinfo</p>
@@ -13,15 +22,6 @@
 <p>Windows 10-11 (via CIM/WMI)</p>
 <p>PowerShell Execution policy adjustment.</p>
 <pre>powershell.exe -ExecutionPolicy Bypass -File .\system-info.ps1</pre>
-
-<b>Sample Output:</b>
-<pre>
-LENOVO 20HGS0HK00
-Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz (0.4 - 3.9 GHz)
-25GB RAM / 500 GB NVMe SSD / DVD
-NVIDIA GeForce GTX 1050
-Ubuntu 24.04.3 LTS
-</pre>
 
 <h2>To-Do</h2>
 <ul>
