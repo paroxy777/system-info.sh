@@ -1,31 +1,60 @@
-<h1>system-info</h1>
+# system-info
 
-<p>Displays basic system info.</p> 
+Displays basic system information in a concise, easy-to-read format.
 
-<p>Useful for identification / inventory / sales prep / etc.</p>
+Useful for system identification, hardware inventory, troubleshooting, and sales preparation.
 
-<h3>Sample Output:</h3>
-<pre>
+## Sample Output
+
+```text
 LENOVO 20HGS0HK00
 Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz (0.4 - 3.9 GHz)
 25GB RAM / 500 GB NVMe SSD / DVD
 NVIDIA GeForce GTX 1050
 Ubuntu 24.04.3 LTS
-</pre>
+```
 
-<h2>Requirements</h2>
-<h3>Linux</h3>
-<p>Requires the package hwinfo</p>
-<pre>apt install hwinfo</pre>
+## Requirements
 
-<h3>Windows</h3>
-<p>Windows 10-11 (via CIM/WMI)</p>
-<p>PowerShell Execution policy adjustment.</p>
-<pre>powershell.exe -ExecutionPolicy Bypass -File .\system-info.ps1</pre>
+### Linux
 
-<h2>To-Do</h2>
-<ul>
-  <li>Improve dGPU detection. (Add Intel Arc, AMD integrated graphics, NVIDIA Optimus and hybrid graphics configurations, etc.)</li>
-  <li>Improve NVMe detection. (Use bus type instead of model name.)</li>
-  <li>Improve CPU speed range detection. (Use power management data instead).</li>
-</ul>
+Requires the `hwinfo` package.
+
+Install using:
+
+```bash
+sudo apt install hwinfo
+```
+
+### Windows
+
+- Windows 10 / 11
+- Uses CIM/WMI for hardware information.
+- PowerShell execution policy adjustment may be required.
+
+Run using:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\system-info.ps1
+```
+
+## To-Do
+
+- [ ] Improve dedicated GPU (dGPU) detection.
+  - Add Intel Arc support.
+  - Improve AMD integrated graphics detection.
+  - Improve NVIDIA Optimus and hybrid graphics detection.
+
+- [ ] Improve NVMe detection.
+  - Use storage bus type instead of model-name matching.
+
+- [ ] Improve CPU speed range detection.
+  - Use power management data instead.
+
+## Supported Platforms
+
+| Platform | Implementation |
+|---|---|
+| Linux | `system-info.sh` |
+| Windows | `system-info.ps1` |
+| Windows CMD | `system-info.cmd` (requires system-info.ps1) |
