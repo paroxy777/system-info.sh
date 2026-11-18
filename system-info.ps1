@@ -101,7 +101,7 @@ $StorageOutput = @()
 foreach ($Disk in $Disks) {
 
     $SizeGB = Get-NearestCapacity `
-    -SizeGB ($Disk.Size / 1GB) `
+    -SizeGB ($Disk.Size / 1000000000) `
     -StandardSizes @(8, 16, 32, 64, 120, 128, 240, 250, 256, 480, 500, 512, 960, 1000, 1024, 2000, 2048, 4000, 4096, 8000, 8192)
 
     $Type = "Unknown"
