@@ -85,6 +85,27 @@ cpu=${cpu:-Unknown CPU}
 
 # RAM
 
+# Round to nearest standard hardware capacity
+nearest_capacity() {
+    awk -v value="$1" -v choices="$2" '
+    BEGIN {
+        n = split(choices, sizes, " ")
+        best = sizes[1]
+        diff = (value - best) ^ 2
+
+        for (i = 2; i <= n; i++) {
+            d = (value - sizes[i]) ^ 2
+
+            if (d < diff) {
+                diff = d
+                best = sizes[i]
+            }
+        }
+
+        printf "%d", best
+    }'
+}
+
 ram_bytes=$(hwinfo --memory 2>/dev/null |
     awk '/Memory Size:/ {
         for (i=1; i<=NF; i++) {
@@ -109,8 +130,9 @@ if [[ -z "$ram_bytes" ]]; then
     }' /proc/meminfo)
 fi
 
-ram_gb=$(awk -v b="$ram_bytes" \
-    'BEGIN {printf "%.0f", b/1000000000}')
+ram_gb=$(nearest_capacity \
+    "$(awk -v b="$ram_bytes" 'BEGIN {print b/1000000000}')" \
+    "1 2 4 8 12 16 24 32 48 64 96 128 192 256 512 1024")
 
 ram="${ram_gb}GB RAM"
 
@@ -140,8 +162,9 @@ if [[ -n "$disk" ]]; then
     size=$(lsblk -dnbo SIZE "$disk" 2>/dev/null | head -n 1)
     name=$(basename "$disk")
 
-    size_gb=$(awk -v b="${size:-0}" \
-        'BEGIN {printf "%.0f", b/1000000000}')
+    size_gb=$(nearest_capacity \
+    "$(awk -v b="${size:-0}" 'BEGIN {print b/1000000000}')" \
+    "8 16 32 64 120 128 240 250 256 320 480 500 512 960 1000 1024 2000 2048 4000 4096 8000 8192")
 
     if [[ "$name" == nvme* ]]; then
         type="NVMe SSD"

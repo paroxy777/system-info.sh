@@ -62,12 +62,27 @@ else {
 # 3. RAM
 # ============================================================
 
+function Get-NearestCapacity {
+    param (
+        [double]$SizeGB,
+        [double[]]$StandardSizes
+    )
+
+    $Nearest = $StandardSizes |
+        Sort-Object { [math]::Abs($_ - $SizeGB) } |
+        Select-Object -First 1
+
+    return $Nearest
+}
+
 $RAMBytes = (
     Get-CimInstance Win32_PhysicalMemory |
     Measure-Object -Property Capacity -Sum
 ).Sum
 
-$RAMGB = [math]::Round($RAMBytes / 1GB)
+$RAMGB = Get-NearestCapacity `
+    -SizeGB ($RAMBytes / 1GB) `
+    -StandardSizes @(1, 2, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512, 1024)
 
 $RAMOutput = "${RAMGB}GB RAM"
 
@@ -85,7 +100,9 @@ $StorageOutput = @()
 
 foreach ($Disk in $Disks) {
 
-    $SizeGB = [math]::Round($Disk.Size / 1GB)
+    $SizeGB = Get-NearestCapacity `
+    -SizeGB ($Disk.Size / 1000000000) `
+    -StandardSizes @(8, 16, 32, 64, 120, 128, 240, 250, 256, 480, 500, 512, 960, 1000, 1024, 2000, 2048, 4000, 4096, 8000, 8192)
 
     $Type = "Unknown"
 
