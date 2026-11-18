@@ -7,6 +7,8 @@
 ### Changed
 
 ### Fixed
+- RAM size now rounded to nearest logical size
+- Storage size should now match the drive's labelled size (465GB is now 500GB)
 
 ## [0.1.0]
 
